@@ -118,7 +118,8 @@ internal extension Machine {
             typeLaunchReason: Void.self,
             typeCancelReason: ExecutableResponse?.self,
             outlines: [
-                { _ in mainOutline() }
+                { _ in mainOutline() },
+                { _ in updateState() }
             ]
         ) {
             state
