@@ -116,7 +116,7 @@ internal extension Machine {
             typeRequest: ExecutableRequest.self,
             typeResponse: ExecutableResponse.self,
             typeLaunchReason: Void.self,
-            typeCancelReason: ExecutableResponse?.self,
+            typeCancelReason: Void.self,
             outlines: [
                 { _ in mainOutline() },
                 { _ in updateState() }
@@ -168,7 +168,7 @@ internal extension Machine {
                 )
                 
             case .willCancel(let id):
-                return (state, .int(.willCancel(id: id, reason: nil)))
+                return (state, .int(.willCancel(id: id, reason: Void())))
             case .willUpdateState(let strategy):
                 let newState = strategy.function(state)
                 return (newState, .ext(.didUpdateState(newState)))
@@ -177,19 +177,15 @@ internal extension Machine {
             switch event {
             case .didLaunch(let id, _):
                 return (state, .ext(.didLaunchSucceed(id: id)))
-            case .didCancel(let id, let response):
-                if let response {
-                    switch response {
-                    case .success(let data, let value):
-                        return (state, .ext(.didSucceed(id: id, data: data, response: value)))
-                    case .failure(let error, let value):
-                        return (state, .ext(.didFail(id: id, error: error, response: value)))
-                    }
-                } else {
-                    return (state, .ext(.didCancel(id: id)))
-                }
+            case .didCancel(let id, _):
+                 return (state, .ext(.didCancel(id: id)))
             case .didEmit(let id, let response):
-                return (state, .int(.willCancel(id: id, reason: response)))
+                switch response {
+                case .success(let data, let value):
+                    return (state, .ext(.didSucceed(id: id, data: data, response: value)))
+                case .failure(let error, let value):
+                    return (state, .ext(.didFail(id: id, error: error, response: value)))
+                }
             }
         } holder: {
             RequestHolder()
@@ -197,14 +193,14 @@ internal extension Machine {
             holder.task = URLSession.shared.dataTask(with: request.urlRequest) { data, response, error in
                 if let error {
                     if let error = error as? URLError {
-                        callback(.failure(error: .urlError(error), response: response))
+                        callback((.failure(error: .urlError(error), response: response), true))
                     } else {
-                        callback(.failure(error: .otherError(error), response: response))
+                        callback((.failure(error: .otherError(error), response: response), true))
                     }
                 } else if let data {
-                    callback(.success(data: data, response: response))
+                    callback((.success(data: data, response: response), true))
                 } else {
-                    callback(.failure(error: .unknown, response: nil))
+                    callback((.failure(error: .unknown, response: nil), true))
                 }
             }
             
