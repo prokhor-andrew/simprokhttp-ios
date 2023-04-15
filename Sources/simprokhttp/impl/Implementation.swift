@@ -15,95 +15,90 @@ import simprokstate
 internal extension Machine {
         
     private static func cancelOutline() -> Outline<HttpOutput, HttpInput, HttpInput, HttpOutput> {
-        Outline.create { trigger in
-            switch trigger {
-            case .ext(.willCancel(let id)):
-                return OutlineTransition(
-                    Outline.create { trigger in
-                        switch trigger {
-                        case .int(.didCancel(let id)):
-                            return OutlineTransition(
-                                .finale(),
-                                effects: .ext(.didCancel(id: id))
-                            )
-                        default:
-                            return nil
-                        }
-                    },
-                    effects: .int(.willCancel(id: id))
-                )
-            default:
-                return nil
+        OutlineBuilder()
+            .when { trigger in
+                switch trigger {
+                case .ext(.willCancel(let id)):
+                    return [.int(.willCancel(id: id))]
+                default:
+                    return nil
+                }
             }
-        }
+            .when { trigger in
+                switch trigger {
+                case .int(.didCancel(let id)):
+                    return [.ext(.didCancel(id: id))]
+                default:
+                    return nil
+                }
+            }
+            .build(.finale())
     }
     
     private static func mainOutline() -> Outline<HttpOutput, HttpInput, HttpInput, HttpOutput> {
-        Outline.create { trigger in
-            switch trigger {
-            case .ext(.willLaunch(let id, let request)):
-                return OutlineTransition(
-                    Outline.create { trigger in
-                        switch trigger {
-                        case .int(.didLaunchSucceed(let id)):
-                            return OutlineTransition(
-                                Outline.create { trigger in
-                                    switch trigger {
-                                    case .int(.didSucceed(let id, let data, let response)):
-                                        return OutlineTransition(
-                                            .finale(),
-                                            effects: .ext(.didSucceed(id: id, data: data, response: response))
-                                        )
-                                    case .int(.didFail(let id, let error, let response)):
-                                        return OutlineTransition(
-                                            .finale(),
-                                            effects: .ext(.didFail(id: id, error: error, response: response))
-                                        )
-                                    default:
-                                        return nil
-                                    }
-                                },
-                                effects: .ext(.didLaunchSucceed(id: id))
-                            )
-                        case .int(.didLaunchFail(let id, let reason)):
-                            return OutlineTransition(
-                                .finale(),
-                                effects: .ext(.didLaunchFail(id: id, reason: reason))
-                            )
-                        default:
-                            return nil
-                        }
-                    }.switchOnTransition(to: cancelOutline()),
-                    effects: .int(.willLaunch(id: id, request: request))
-                )
-            default:
-                return nil
+        OutlineBuilder()
+            .when { trigger in
+                switch trigger {
+                case .ext(.willLaunch(let id, let request)):
+                    return [.int(.willLaunch(id: id, request: request))]
+                default:
+                    return nil
+                }
             }
-        }
+            .handle { state in
+                state.or(Outline.create { trigger in
+                    switch trigger {
+                    case .int(.didLaunchFail(let id, let reason)):
+                        return OutlineTransition(
+                            .finale(),
+                            effects: .ext(.didLaunchFail(id: id, reason: reason))
+                        )
+                    default:
+                        return nil
+                    }
+                })
+                .switchOnTransition(to: cancelOutline())
+            }
+            .when { trigger in
+                switch trigger {
+                case .int(.didLaunchSucceed(let id)):
+                    return [.ext(.didLaunchSucceed(id: id))]
+                default:
+                    return nil
+                }
+            }
+            .when { trigger in
+                switch trigger {
+                case .int(.didSucceed(let id, let data, let response)):
+                    return [.ext(.didSucceed(id: id, data: data, response: response))]
+                case .int(.didFail(let id, let error, let response)):
+                    return [.ext(.didFail(id: id, error: error, response: response))]
+                default:
+                    return nil
+                }
+            }
+            .build(.finale())
     }
     
     private static func updateState() -> Outline<HttpOutput, HttpInput, HttpInput, HttpOutput> {
-        Outline.create { trigger in
-            switch trigger {
-            case .ext(.willUpdateState(let strategy)):
-                return OutlineTransition(
-                    Outline.create { trigger in
-                        switch trigger {
-                        case .int(.didUpdateState(let state)):
-                            return OutlineTransition(
-                                .finale(),
-                                effects: .ext(.didUpdateState(state))
-                            )
-                        default:
-                            return nil
-                        }
-                    },
-                    effects: .int(.willUpdateState(strategy))
-                )
-            default:
-                return nil
+        OutlineBuilder()
+            .when { trigger in
+                switch trigger {
+                case .ext(.willUpdateState(let strategy)):
+                    return [.int(.willUpdateState(strategy))]
+                default:
+                    return nil
+                }
             }
-        }
+            .when { trigger in
+                switch trigger {
+                case .int(.didUpdateState(let state)):
+                    return [.ext(.didUpdateState(state))]
+                default:
+                    return nil
+                }
+            }
+            .build(.finale())
     }
     
     static func HttpImplementation(state: HttpState) -> Machine<Input, Output>
