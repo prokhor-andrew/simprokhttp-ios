@@ -15,8 +15,9 @@ public struct HttpRequest {
     public let method: HttpMethod
     public let headers: Set<HttpHeader>?
     public let body: Data
-    public let cachePolicy: URLRequest.CachePolicy?
     public let timeoutInMillis: Int?
+    public let cachePolicy: URLRequest.CachePolicy?
+    public let allowsCellularAccess: Bool?
 
     
     public init(
@@ -25,15 +26,17 @@ public struct HttpRequest {
         method: HttpMethod,
         headers: Set<HttpHeader>? = nil,
         body: Data,
+        timeoutInMillis: Int? = nil,
         cachePolicy: URLRequest.CachePolicy? = nil,
-        timeoutInMillis: Int? = nil
+        allowsCellularAccess: Bool? = nil
     ) {
         self.base = base
         self.path = path
         self.method = method
         self.headers = headers
         self.body = body
-        self.cachePolicy = cachePolicy
         self.timeoutInMillis = timeoutInMillis
+        self.cachePolicy = cachePolicy
+        self.allowsCellularAccess = allowsCellularAccess
     }
 }

@@ -21,8 +21,9 @@ public struct HttpUpdateState {
             HttpState(
                 base: HttpUrl(scheme: scheme, host: state.base.host, pathPrefix: state.base.pathPrefix),
                 headers: state.headers,
+                timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                timeoutInMillis: state.timeoutInMillis
+                allowsCellularAccess: state.allowsCellularAccess
             )
         }
     }
@@ -32,8 +33,9 @@ public struct HttpUpdateState {
             HttpState(
                 base: HttpUrl(scheme: state.base.scheme, host: host, pathPrefix: state.base.pathPrefix),
                 headers: state.headers,
+                timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                timeoutInMillis: state.timeoutInMillis
+                allowsCellularAccess: state.allowsCellularAccess
             )
         }
     }
@@ -43,8 +45,9 @@ public struct HttpUpdateState {
             HttpState(
                 base: HttpUrl(scheme: state.base.scheme, host: state.base.host, pathPrefix: pathPrefix),
                 headers: state.headers,
+                timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                timeoutInMillis: state.timeoutInMillis
+                allowsCellularAccess: state.allowsCellularAccess
             )
         }
     }
@@ -54,8 +57,9 @@ public struct HttpUpdateState {
             HttpState(
                 base: state.base,
                 headers: headers,
+                timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                timeoutInMillis: state.timeoutInMillis
+                allowsCellularAccess: state.allowsCellularAccess
             )
         }
     }
@@ -65,8 +69,9 @@ public struct HttpUpdateState {
             HttpState(
                 base: state.base,
                 headers: state.headers.union(headers),
+                timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                timeoutInMillis: state.timeoutInMillis
+                allowsCellularAccess: state.allowsCellularAccess
             )
         }
     }
@@ -80,8 +85,9 @@ public struct HttpUpdateState {
             HttpState(
                 base: state.base,
                 headers: state.headers.filter { !headers.contains($0.name) },
+                timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                timeoutInMillis: state.timeoutInMillis
+                allowsCellularAccess: state.allowsCellularAccess
             )
         }
     }
@@ -95,8 +101,9 @@ public struct HttpUpdateState {
             HttpState(
                 base: state.base,
                 headers: state.headers,
+                timeoutInMillis: timeout,
                 cachePolicy: state.cachePolicy,
-                timeoutInMillis: timeout
+                allowsCellularAccess: state.allowsCellularAccess
             )
         }
     }
@@ -106,8 +113,9 @@ public struct HttpUpdateState {
             HttpState(
                 base: state.base,
                 headers: state.headers,
+                timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: cachePolicy,
-                timeoutInMillis: state.timeoutInMillis
+                allowsCellularAccess: state.allowsCellularAccess
             )
         }
     }

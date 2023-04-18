@@ -15,11 +15,13 @@ struct ExecutableRequest: Hashable {
     let body: Data
     let method: String
     let cachePolicy: URLRequest.CachePolicy
+    let allowsCellularAccess: Bool
     
     
     var urlRequest: URLRequest {
         var request = URLRequest(url: url)
         
+        request.allowsCellularAccess = allowsCellularAccess
         request.cachePolicy = cachePolicy
         request.httpMethod = method
         request.allHTTPHeaderFields = headers
