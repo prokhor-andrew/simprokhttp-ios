@@ -120,6 +120,18 @@ public struct HttpUpdateState {
         }
     }
     
+    public static func set(allowsCellularAccess: Bool) -> HttpUpdateState {
+        HttpUpdateState { state in
+            HttpState(
+                base: state.base,
+                headers: state.headers,
+                timeoutInMillis: state.timeoutInMillis,
+                cachePolicy: state.cachePolicy,
+                allowsCellularAccess: allowsCellularAccess
+            )
+        }
+    }
+    
     public static func custom(function: @escaping (HttpState) -> HttpState) -> HttpUpdateState {
         HttpUpdateState(function)
     }
