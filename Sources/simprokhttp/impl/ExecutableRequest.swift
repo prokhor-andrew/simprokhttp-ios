@@ -16,7 +16,7 @@ struct ExecutableRequest: Hashable {
     let method: String
     let cachePolicy: URLRequest.CachePolicy
     let allowsCellularAccess: Bool
-    
+    let isEphemeral: Bool
     
     var urlRequest: URLRequest {
         var request = URLRequest(url: url)

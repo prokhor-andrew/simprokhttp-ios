@@ -23,7 +23,8 @@ public struct HttpUpdateState {
                 headers: state.headers,
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                allowsCellularAccess: state.allowsCellularAccess
+                allowsCellularAccess: state.allowsCellularAccess,
+                isEphemeral: state.isEphemeral
             )
         }
     }
@@ -35,7 +36,8 @@ public struct HttpUpdateState {
                 headers: state.headers,
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                allowsCellularAccess: state.allowsCellularAccess
+                allowsCellularAccess: state.allowsCellularAccess,
+                isEphemeral: state.isEphemeral
             )
         }
     }
@@ -47,7 +49,8 @@ public struct HttpUpdateState {
                 headers: state.headers,
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                allowsCellularAccess: state.allowsCellularAccess
+                allowsCellularAccess: state.allowsCellularAccess,
+                isEphemeral: state.isEphemeral
             )
         }
     }
@@ -59,7 +62,8 @@ public struct HttpUpdateState {
                 headers: headers,
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                allowsCellularAccess: state.allowsCellularAccess
+                allowsCellularAccess: state.allowsCellularAccess,
+                isEphemeral: state.isEphemeral
             )
         }
     }
@@ -71,7 +75,8 @@ public struct HttpUpdateState {
                 headers: state.headers.union(headers),
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                allowsCellularAccess: state.allowsCellularAccess
+                allowsCellularAccess: state.allowsCellularAccess,
+                isEphemeral: state.isEphemeral
             )
         }
     }
@@ -87,7 +92,8 @@ public struct HttpUpdateState {
                 headers: state.headers.filter { !headers.contains($0.name) },
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                allowsCellularAccess: state.allowsCellularAccess
+                allowsCellularAccess: state.allowsCellularAccess,
+                isEphemeral: state.isEphemeral
             )
         }
     }
@@ -103,7 +109,8 @@ public struct HttpUpdateState {
                 headers: state.headers,
                 timeoutInMillis: timeout,
                 cachePolicy: state.cachePolicy,
-                allowsCellularAccess: state.allowsCellularAccess
+                allowsCellularAccess: state.allowsCellularAccess,
+                isEphemeral: state.isEphemeral
             )
         }
     }
@@ -115,7 +122,8 @@ public struct HttpUpdateState {
                 headers: state.headers,
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: cachePolicy,
-                allowsCellularAccess: state.allowsCellularAccess
+                allowsCellularAccess: state.allowsCellularAccess,
+                isEphemeral: state.isEphemeral
             )
         }
     }
@@ -127,10 +135,25 @@ public struct HttpUpdateState {
                 headers: state.headers,
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
-                allowsCellularAccess: allowsCellularAccess
+                allowsCellularAccess: allowsCellularAccess,
+                isEphemeral: state.isEphemeral
             )
         }
     }
+    
+    public static func set(isEphemeral: Bool) -> HttpUpdateState {
+        HttpUpdateState { state in
+            HttpState(
+                base: state.base,
+                headers: state.headers,
+                timeoutInMillis: state.timeoutInMillis,
+                cachePolicy: state.cachePolicy,
+                allowsCellularAccess: state.allowsCellularAccess,
+                isEphemeral: isEphemeral
+            )
+        }
+    }
+    
     
     public static func custom(function: @escaping (HttpState) -> HttpState) -> HttpUpdateState {
         HttpUpdateState(function)

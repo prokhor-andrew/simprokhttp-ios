@@ -129,6 +129,7 @@ internal extension Machine {
                 let body = request.body
                 let cachePolicy = request.cachePolicy ?? state.cachePolicy
                 let allowsCellularAccess = request.allowsCellularAccess ?? state.allowsCellularAccess
+                let isEphemeral = request.isEphemeral ?? state.isEphemeral
                 
                 guard timeout >= 0 else {
                     return (state, .ext(.didLaunchFail(id: id, reason: .invalidTimeout)))
@@ -160,7 +161,8 @@ internal extension Machine {
                                 body: body,
                                 method: method.string,
                                 cachePolicy: cachePolicy,
-                                allowsCellularAccess: allowsCellularAccess
+                                allowsCellularAccess: allowsCellularAccess,
+                                isEphemeral: isEphemeral
                             )
                         )
                     )
@@ -189,7 +191,10 @@ internal extension Machine {
         } holder: {
             RequestHolder()
         } onLaunch: { holder, request, callback in
-            holder.task = URLSession.shared.dataTask(with: request.urlRequest) { data, response, error in
+            
+            let session = request.isEphemeral ? URLSession(configuration: .ephemeral) : URLSession.shared
+            
+            holder.task = session.dataTask(with: request.urlRequest) { data, response, error in
                 if let error {
                     if let error = error as? URLError {
                         callback((.failure(error: .urlError(error), response: response), true))

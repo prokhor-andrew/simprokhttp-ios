@@ -14,6 +14,7 @@ public struct HttpState {
     public let timeoutInMillis: Int
     public let cachePolicy: URLRequest.CachePolicy
     public let allowsCellularAccess: Bool
+    public let isEphemeral: Bool
     
     
     public init(
@@ -21,12 +22,14 @@ public struct HttpState {
         headers: Set<HttpHeader>,
         timeoutInMillis: Int,
         cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
-        allowsCellularAccess: Bool = true
+        allowsCellularAccess: Bool = true,
+        isEphemeral: Bool = false
     ) {
         self.base = base
         self.headers = headers
         self.timeoutInMillis = timeoutInMillis
         self.cachePolicy = cachePolicy
         self.allowsCellularAccess = allowsCellularAccess
+        self.isEphemeral = isEphemeral
     }
 }

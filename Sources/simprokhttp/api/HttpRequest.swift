@@ -18,6 +18,7 @@ public struct HttpRequest {
     public let timeoutInMillis: Int?
     public let cachePolicy: URLRequest.CachePolicy?
     public let allowsCellularAccess: Bool?
+    public let isEphemeral: Bool?
 
     
     public init(
@@ -28,7 +29,8 @@ public struct HttpRequest {
         body: Data,
         timeoutInMillis: Int? = nil,
         cachePolicy: URLRequest.CachePolicy? = nil,
-        allowsCellularAccess: Bool? = nil
+        allowsCellularAccess: Bool? = nil,
+        isEphemeral: Bool? = nil
     ) {
         self.base = base
         self.path = path
@@ -38,5 +40,6 @@ public struct HttpRequest {
         self.timeoutInMillis = timeoutInMillis
         self.cachePolicy = cachePolicy
         self.allowsCellularAccess = allowsCellularAccess
+        self.isEphemeral = isEphemeral
     }
 }
