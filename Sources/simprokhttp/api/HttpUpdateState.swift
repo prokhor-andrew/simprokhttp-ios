@@ -5,6 +5,7 @@
 //  Created by Andriy Prokhorenko on 03.04.2023.
 //
 
+import Foundation
 
 
 public struct HttpUpdateState {
@@ -20,6 +21,7 @@ public struct HttpUpdateState {
             HttpState(
                 base: HttpUrl(scheme: scheme, host: state.base.host, pathPrefix: state.base.pathPrefix),
                 headers: state.headers,
+                cachePolicy: state.cachePolicy,
                 timeoutInMillis: state.timeoutInMillis
             )
         }
@@ -30,6 +32,7 @@ public struct HttpUpdateState {
             HttpState(
                 base: HttpUrl(scheme: state.base.scheme, host: host, pathPrefix: state.base.pathPrefix),
                 headers: state.headers,
+                cachePolicy: state.cachePolicy,
                 timeoutInMillis: state.timeoutInMillis
             )
         }
@@ -40,6 +43,7 @@ public struct HttpUpdateState {
             HttpState(
                 base: HttpUrl(scheme: state.base.scheme, host: state.base.host, pathPrefix: pathPrefix),
                 headers: state.headers,
+                cachePolicy: state.cachePolicy,
                 timeoutInMillis: state.timeoutInMillis
             )
         }
@@ -50,6 +54,7 @@ public struct HttpUpdateState {
             HttpState(
                 base: state.base,
                 headers: headers,
+                cachePolicy: state.cachePolicy,
                 timeoutInMillis: state.timeoutInMillis
             )
         }
@@ -60,6 +65,7 @@ public struct HttpUpdateState {
             HttpState(
                 base: state.base,
                 headers: state.headers.union(headers),
+                cachePolicy: state.cachePolicy,
                 timeoutInMillis: state.timeoutInMillis
             )
         }
@@ -74,6 +80,7 @@ public struct HttpUpdateState {
             HttpState(
                 base: state.base,
                 headers: state.headers.filter { !headers.contains($0.name) },
+                cachePolicy: state.cachePolicy,
                 timeoutInMillis: state.timeoutInMillis
             )
         }
@@ -88,7 +95,19 @@ public struct HttpUpdateState {
             HttpState(
                 base: state.base,
                 headers: state.headers,
+                cachePolicy: state.cachePolicy,
                 timeoutInMillis: timeout
+            )
+        }
+    }
+    
+    public static func set(cachePolicy: URLRequest.CachePolicy) -> HttpUpdateState {
+        HttpUpdateState { state in
+            HttpState(
+                base: state.base,
+                headers: state.headers,
+                cachePolicy: cachePolicy,
+                timeoutInMillis: state.timeoutInMillis
             )
         }
     }

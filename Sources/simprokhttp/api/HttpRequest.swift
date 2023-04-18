@@ -15,6 +15,7 @@ public struct HttpRequest {
     public let method: HttpMethod
     public let headers: Set<HttpHeader>?
     public let body: Data
+    public let cachePolicy: URLRequest.CachePolicy?
     public let timeoutInMillis: Int?
 
     
@@ -24,6 +25,7 @@ public struct HttpRequest {
         method: HttpMethod,
         headers: Set<HttpHeader>? = nil,
         body: Data,
+        cachePolicy: URLRequest.CachePolicy? = nil,
         timeoutInMillis: Int? = nil
     ) {
         self.base = base
@@ -31,6 +33,7 @@ public struct HttpRequest {
         self.method = method
         self.headers = headers
         self.body = body
+        self.cachePolicy = cachePolicy
         self.timeoutInMillis = timeoutInMillis
     }
 }

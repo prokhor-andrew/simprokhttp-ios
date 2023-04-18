@@ -127,6 +127,7 @@ internal extension Machine {
                 let headers = request.headers ?? state.headers
                 let method = request.method
                 let body = request.body
+                let cachePolicy = request.cachePolicy ?? state.cachePolicy
                 
                 guard timeout >= 0 else {
                     return (state, .ext(.didLaunchFail(id: id, reason: .invalidTimeout)))
@@ -156,7 +157,8 @@ internal extension Machine {
                                     return copy
                                 }),
                                 body: body,
-                                method: method.string
+                                method: method.string,
+                                cachePolicy: cachePolicy
                             )
                         )
                     )
@@ -185,6 +187,9 @@ internal extension Machine {
         } holder: {
             RequestHolder()
         } onLaunch: { holder, request, callback in
+            
+            let session = URLSession(configuration: .default)
+            
             holder.task = URLSession.shared.dataTask(with: request.urlRequest) { data, response, error in
                 if let error {
                     if let error = error as? URLError {
