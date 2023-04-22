@@ -24,7 +24,13 @@ public struct HttpUpdateState {
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
                 allowsCellularAccess: state.allowsCellularAccess,
-                isEphemeral: state.isEphemeral
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
             )
         }
     }
@@ -37,7 +43,13 @@ public struct HttpUpdateState {
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
                 allowsCellularAccess: state.allowsCellularAccess,
-                isEphemeral: state.isEphemeral
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
             )
         }
     }
@@ -50,7 +62,13 @@ public struct HttpUpdateState {
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
                 allowsCellularAccess: state.allowsCellularAccess,
-                isEphemeral: state.isEphemeral
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
             )
         }
     }
@@ -63,7 +81,13 @@ public struct HttpUpdateState {
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
                 allowsCellularAccess: state.allowsCellularAccess,
-                isEphemeral: state.isEphemeral
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
             )
         }
     }
@@ -76,7 +100,13 @@ public struct HttpUpdateState {
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
                 allowsCellularAccess: state.allowsCellularAccess,
-                isEphemeral: state.isEphemeral
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
             )
         }
     }
@@ -93,7 +123,13 @@ public struct HttpUpdateState {
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
                 allowsCellularAccess: state.allowsCellularAccess,
-                isEphemeral: state.isEphemeral
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
             )
         }
     }
@@ -110,7 +146,13 @@ public struct HttpUpdateState {
                 timeoutInMillis: timeout,
                 cachePolicy: state.cachePolicy,
                 allowsCellularAccess: state.allowsCellularAccess,
-                isEphemeral: state.isEphemeral
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
             )
         }
     }
@@ -123,7 +165,13 @@ public struct HttpUpdateState {
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: cachePolicy,
                 allowsCellularAccess: state.allowsCellularAccess,
-                isEphemeral: state.isEphemeral
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
             )
         }
     }
@@ -136,12 +184,18 @@ public struct HttpUpdateState {
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
                 allowsCellularAccess: allowsCellularAccess,
-                isEphemeral: state.isEphemeral
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
             )
         }
     }
     
-    public static func set(isEphemeral: Bool) -> HttpUpdateState {
+    public static func set(allowsExpensiveNetworkAccess: Bool) -> HttpUpdateState {
         HttpUpdateState { state in
             HttpState(
                 base: state.base,
@@ -149,11 +203,130 @@ public struct HttpUpdateState {
                 timeoutInMillis: state.timeoutInMillis,
                 cachePolicy: state.cachePolicy,
                 allowsCellularAccess: state.allowsCellularAccess,
-                isEphemeral: isEphemeral
+                allowsExpensiveNetworkAccess: allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
             )
         }
     }
     
+    public static func set(allowsConstrainedNetworkAccess: Bool) -> HttpUpdateState {
+        HttpUpdateState { state in
+            HttpState(
+                base: state.base,
+                headers: state.headers,
+                timeoutInMillis: state.timeoutInMillis,
+                cachePolicy: state.cachePolicy,
+                allowsCellularAccess: state.allowsCellularAccess,
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
+            )
+        }
+    }
+    
+    public static func set(networkServiceType: URLRequest.NetworkServiceType) -> HttpUpdateState {
+        HttpUpdateState { state in
+            HttpState(
+                base: state.base,
+                headers: state.headers,
+                timeoutInMillis: state.timeoutInMillis,
+                cachePolicy: state.cachePolicy,
+                allowsCellularAccess: state.allowsCellularAccess,
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
+            )
+        }
+    }
+    
+    public static func set(httpShouldUsePipelining: Bool) -> HttpUpdateState {
+        HttpUpdateState { state in
+            HttpState(
+                base: state.base,
+                headers: state.headers,
+                timeoutInMillis: state.timeoutInMillis,
+                cachePolicy: state.cachePolicy,
+                allowsCellularAccess: state.allowsCellularAccess,
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
+            )
+        }
+    }
+    
+    public static func set(httpShouldSetCookies: Bool) -> HttpUpdateState {
+        HttpUpdateState { state in
+            HttpState(
+                base: state.base,
+                headers: state.headers,
+                timeoutInMillis: state.timeoutInMillis,
+                cachePolicy: state.cachePolicy,
+                allowsCellularAccess: state.allowsCellularAccess,
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
+            )
+        }
+    }
+    
+    public static func set(httpCookieAcceptPolicy: HTTPCookie.AcceptPolicy) -> HttpUpdateState {
+        HttpUpdateState { state in
+            HttpState(
+                base: state.base,
+                headers: state.headers,
+                timeoutInMillis: state.timeoutInMillis,
+                cachePolicy: state.cachePolicy,
+                allowsCellularAccess: state.allowsCellularAccess,
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: httpCookieAcceptPolicy,
+                waitsForConnectivity: state.waitsForConnectivity
+            )
+        }
+    }
+    
+    public static func set(waitsForConnectivity: Bool) -> HttpUpdateState {
+        HttpUpdateState { state in
+            HttpState(
+                base: state.base,
+                headers: state.headers,
+                timeoutInMillis: state.timeoutInMillis,
+                cachePolicy: state.cachePolicy,
+                allowsCellularAccess: state.allowsCellularAccess,
+                allowsExpensiveNetworkAccess: state.allowsExpensiveNetworkAccess,
+                allowsConstrainedNetworkAccess: state.allowsConstrainedNetworkAccess,
+                networkServiceType: state.networkServiceType,
+                httpShouldUsePipelining: state.httpShouldUsePipelining,
+                httpShouldSetCookies: state.httpShouldSetCookies,
+                httpCookieAcceptPolicy: state.httpCookieAcceptPolicy,
+                waitsForConnectivity: waitsForConnectivity
+            )
+        }
+    }
     
     public static func custom(function: @escaping (HttpState) -> HttpState) -> HttpUpdateState {
         HttpUpdateState(function)

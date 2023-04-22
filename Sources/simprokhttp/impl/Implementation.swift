@@ -101,7 +101,9 @@ internal extension Machine {
             .build(.finale())
     }
     
-    static func HttpImplementation(state: HttpState) -> Machine<Input, Output>
+    static func HttpImplementation(
+        state: HttpState
+    ) -> Machine<Input, Output>
     where Input == IdData<String, HttpInput>, Output == IdData<String, HttpOutput> {
         .source(
             typeIntTrigger: HttpOutput.self,
@@ -129,7 +131,19 @@ internal extension Machine {
                 let body = request.body
                 let cachePolicy = request.cachePolicy ?? state.cachePolicy
                 let allowsCellularAccess = request.allowsCellularAccess ?? state.allowsCellularAccess
-                let isEphemeral = request.isEphemeral ?? state.isEphemeral
+                
+                let allowsExpensiveNetworkAccess = request.allowsExpensiveNetworkAccess ?? state.allowsExpensiveNetworkAccess
+                let allowsConstrainedNetworkAccess = request.allowsConstrainedNetworkAccess ?? state.allowsConstrainedNetworkAccess
+                
+                let networkServiceType = request.networkServiceType ?? state.networkServiceType
+                
+                let httpShouldUsePipelining = request.httpShouldUsePipelining ?? state.httpShouldUsePipelining
+                
+                let httpShouldSetCookies = request.httpShouldSetCookies ?? state.httpShouldSetCookies
+                
+                let httpCookieAcceptPolicy = request.httpCookieAcceptPolicy ?? state.httpCookieAcceptPolicy
+                
+                let waitsForConnectivity = request.waitsForConnectivity ?? state.waitsForConnectivity
                 
                 guard timeout >= 0 else {
                     return (state, .ext(.didLaunchFail(id: id, reason: .invalidTimeout)))
@@ -162,7 +176,13 @@ internal extension Machine {
                                 method: method.string,
                                 cachePolicy: cachePolicy,
                                 allowsCellularAccess: allowsCellularAccess,
-                                isEphemeral: isEphemeral
+                                allowsExpensiveNetworkAccess: allowsExpensiveNetworkAccess,
+                                allowsConstrainedNetworkAccess: allowsConstrainedNetworkAccess,
+                                networkServiceType: networkServiceType,
+                                httpShouldUsePipelining: httpShouldUsePipelining,
+                                httpShouldSetCookies: httpShouldSetCookies,
+                                httpCookieAcceptPolicy: httpCookieAcceptPolicy,
+                                waitsForConnectivity: waitsForConnectivity
                             )
                         )
                     )
@@ -192,7 +212,13 @@ internal extension Machine {
             RequestHolder()
         } onLaunch: { holder, request, callback in
             
-            let session = request.isEphemeral ? URLSession(configuration: .ephemeral) : URLSession.shared
+           
+            let config = URLSessionConfiguration.default
+            
+            config.httpCookieAcceptPolicy = request.httpCookieAcceptPolicy
+            config.waitsForConnectivity = request.waitsForConnectivity
+            
+            let session = URLSession(configuration: config)
             
             holder.task = session.dataTask(with: request.urlRequest) { data, response, error in
                 if let error {

@@ -18,8 +18,13 @@ public struct HttpRequest {
     public let timeoutInMillis: Int?
     public let cachePolicy: URLRequest.CachePolicy?
     public let allowsCellularAccess: Bool?
-    public let isEphemeral: Bool?
-
+    public let allowsExpensiveNetworkAccess: Bool?
+    public let allowsConstrainedNetworkAccess: Bool?
+    public let networkServiceType: URLRequest.NetworkServiceType?
+    public let httpShouldUsePipelining: Bool?
+    public let httpShouldSetCookies: Bool?
+    public let httpCookieAcceptPolicy: HTTPCookie.AcceptPolicy?
+    public let waitsForConnectivity: Bool?
     
     public init(
         base: HttpUrl? = nil,
@@ -30,7 +35,13 @@ public struct HttpRequest {
         timeoutInMillis: Int? = nil,
         cachePolicy: URLRequest.CachePolicy? = nil,
         allowsCellularAccess: Bool? = nil,
-        isEphemeral: Bool? = nil
+        allowsExpensiveNetworkAccess: Bool? = nil,
+        allowsConstrainedNetworkAccess: Bool? = nil,
+        networkServiceType: URLRequest.NetworkServiceType? = nil,
+        httpShouldUsePipelining: Bool? = nil,
+        httpShouldSetCookies: Bool? = nil,
+        httpCookieAcceptPolicy: HTTPCookie.AcceptPolicy? = nil,
+        waitsForConnectivity: Bool? = nil
     ) {
         self.base = base
         self.path = path
@@ -40,6 +51,20 @@ public struct HttpRequest {
         self.timeoutInMillis = timeoutInMillis
         self.cachePolicy = cachePolicy
         self.allowsCellularAccess = allowsCellularAccess
-        self.isEphemeral = isEphemeral
+        self.allowsExpensiveNetworkAccess = allowsExpensiveNetworkAccess
+        self.allowsConstrainedNetworkAccess = allowsConstrainedNetworkAccess
+        self.networkServiceType = networkServiceType
+        self.httpShouldUsePipelining = httpShouldUsePipelining
+        self.httpShouldSetCookies = httpShouldSetCookies
+        self.httpCookieAcceptPolicy = httpCookieAcceptPolicy
+        self.waitsForConnectivity = waitsForConnectivity
     }
 }
+
+
+//config.shouldUseExtendedBackgroundIdleMode = false // -
+//config.sessionSendsLaunchEvents = true // -
+//config.multipathServiceType = .interactive // -
+//config.isDiscretionary = true // -
+//config.httpMaximumConnectionsPerHost = 5 // -
+//config.connectionProxyDictionary = [:] // -
